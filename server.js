@@ -15,12 +15,7 @@ parser: SerialPort.parsers.readline('\n')
 });
  
 port.on('open', function() {
-  port.write('1', function(err) {
-    if (err) {
-      return console.log('Error on write: ', err.message);
-    }
     console.log('1 written');
-  });
 });
  
 // open errors will be emitted as an error event
