@@ -3,8 +3,7 @@ var SerialPort = require('serialport'); //아두이노와 시리얼 통신할 �
 
 //라즈베리파이와 연결된 디바이스 주소
 var port = new SerialPort('/dev/ttyACM0', {
-    baudrate: 9600,
-    parser: SerialPort.parsers.readline('\n')
+    baudrate: 9600
 });
 
 //포트 열기
