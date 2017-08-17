@@ -1,18 +1,5 @@
 ﻿
-var five = require("johnny-five");
-var board = new five.Board();
-
-board.on("ready", function () {
-
-    var analog = new five.Pin("A0");
-
-    // Query the analog pin for its current state.
-    analog.query(function (state) {
-        console.log(state);
-    });
-});
-
-/*var SerialPort = require('serialport'); //아두이노와 시리얼 통신할 수 있는 모듈
+var SerialPort = require('serialport'); //아두이노와 시리얼 통신할 수 있는 모듈
 
 //라즈베리파이와 연결된 디바이스 주소
 var port = new SerialPort('/dev/ttyACM0', {
@@ -37,4 +24,3 @@ port.on('data', function (data) {
 });
 
 module.exports = port;
-*/
