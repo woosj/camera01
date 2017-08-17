@@ -12,10 +12,10 @@
     "debug": "3.0.0",
     "ejs": "2.5.7",
     "express": "4.15.4",
+    "johnny-five": "^0.11.3",
     "morgan": "1.8.2",
     "mysql": "2.14.1",
     "raspicam": "0.2.14",
-    "serialport": "^5.0.0",
     "socket_io": "^1.0.0"
   }
 }
