@@ -38,7 +38,7 @@ camera.on("read", function (err, timestamp, filename) {
 
     //소켓통신으로 이미지 파일을 서버로 전송
     socket.on('connect', function () {
-        log("Sockets connected");
+        console.log("Sockets connected");
 
         //delivery 패키지 이용
         delivery = dl.listen(socket);
