@@ -38,8 +38,8 @@ socket.on('connect', function () {
     delivery.on('delivery.connect', function (delivery) {
 
         delivery.send({
-            name: filename,
-            path: 'images/' + filename
+            name: camera.filename,
+            path: 'images/' + camera.filename
         });
 
         delivery.on('send.success', function (file) {
