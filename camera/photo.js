@@ -10,7 +10,7 @@
     7. 채널 관리
 */
 var RaspiCam = require("raspicam"); //카메라 모듈
-var socket = require('socket.io-client')('http://192.168.0.34:3000');   //소켓서버에 연결
+var socket = require('socket.io-client')('http://192.168.0.34:5001');   //소켓서버에 연결
 var dl = require('delivery');   //파일 전송 모듈
 
 var camera = new RaspiCam({    
