@@ -30,9 +30,6 @@ var camera = new RaspiCam({
 //소켓통신으로 이미지 파일을 서버로 전송
 socket.on('connect', function () {
     console.log("Sockets connected");
-
-    
-
 });
 
 //모듈 시작
