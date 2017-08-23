@@ -27,28 +27,6 @@ var camera = new RaspiCam({
     th: '0:0:0'
 });
 
-//소켓통신으로 이미지 파일을 서버로 전송
-socket.on('connect', function () {
-    console.log("Sockets connected");
-
-    //delivery 패키지 이용
-    delivery = dl.listen(socket);
-    delivery.connect();
-
-    delivery.on('delivery.connect', function (delivery) {
-
-        delivery.send({
-            name: camera.filename,
-            path: 'images/' + camera.filename
-        });
-
-        delivery.on('send.success', function (file) {
-            console.log('File sent successfully!');
-        });
-    });
-
-});
-
 //모듈 시작
 camera.on("start", function (err, timestamp) {
     console.log("timelapse started at " + timestamp);
