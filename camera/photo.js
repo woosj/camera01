@@ -27,6 +27,14 @@ var camera = new RaspiCam({
     th: '0:0:0'
 });
 
+//소켓통신으로 이미지 파일을 서버로 전송
+socket.on('connect', function () {
+    console.log("Sockets connected");
+
+    
+
+});
+
 //모듈 시작
 camera.on("start", function (err, timestamp) {
     console.log("timelapse started at " + timestamp);
@@ -35,28 +43,22 @@ camera.on("start", function (err, timestamp) {
 //카메라 촬영
 camera.on("read", function (err, timestamp, filename) {
     console.log("timelapse image captured with filename: " + filename);
-    //소켓통신으로 이미지 파일을 서버로 전송
-    socket.on('connect', function () {
-        console.log("Sockets connected");
+    
+    //delivery 패키지 이용
+    delivery = dl.listen(socket);
+    delivery.connect();
 
-        //delivery 패키지 이용
-        delivery = dl.listen(socket);
-        delivery.connect();
+    delivery.on('delivery.connect', function (delivery) {
 
-        delivery.on('delivery.connect', function (delivery) {
-
-            delivery.send({
-                name: filename,
-                path: 'images/' + filename
-            });
-
-            delivery.on('send.success', function (file) {
-                console.log('File sent successfully!');
-            });
+        delivery.send({
+            name: filename,
+            path: 'images/' + filename
         });
 
+        delivery.on('send.success', function (file) {
+            console.log('File sent successfully!');
+        });
     });
-    
 });
 
 //모듈 종료
@@ -68,5 +70,6 @@ camera.on("exit", function (timestamp) {
 camera.on("stop", function (err, timestamp) {
     console.log("timelapse child process has been stopped at " + timestamp);
 });
+
 
 module.exports = camera;
