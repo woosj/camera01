@@ -55,7 +55,7 @@ camera.on("read", function (err, timestamp, filename) {
 
     var save_filename = moment().format('YYYYMMDDHH') + ".jpg" ;
     delivery.send({
-        name: filename,
+        name: save_filename,
         path: './images/' + filename,
         params: { channel: 'test1' }
     });
