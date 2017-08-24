@@ -27,7 +27,7 @@ port.on('error', function (err) {
 parser.on('data', function (data) {
     console.log('Read and Send Data : ' + data);
 
-    https.get('http://192.168.0.34:8080/testing/insert/data/test1/' + data, (resp) => {
+    http.get('http://192.168.0.34:8080/testing/insert/data/test1/' + data, (resp) => {
         let data = '';
 
         // A chunk of data has been recieved.
@@ -37,7 +37,7 @@ parser.on('data', function (data) {
 
         // The whole response has been received. Print out the result.
         resp.on('end', () => {
-            console.log(JSON.parse(data).explanation);
+            //console.log(JSON.parse(data).explanation);
         });
 
     }).on("error", (err) => {
