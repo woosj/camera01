@@ -13,6 +13,3 @@ var arduino = require("./camera/arduino");
 
 
 camera.start(); //카메라 모듈 실행
-
-camera.set("output");
-camera.set("output", "./images/" + moment().format('YYYYMMDDHHmmss') + ".jpg");
