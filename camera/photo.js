@@ -20,7 +20,7 @@ var camera = new RaspiCam({
     mode: 'timelapse',
     awb: 'off',
     encoding: 'jpg',
-    output: "./images/" + moment().format('YYYYMMDDHHMMSS') + ".jpg",//"images/image_%06d.jpg", // image_000001.jpg, image_000002.jpg,... 
+    output: "./images/" + moment().format('YYYYMMDDHHmmss') + ".jpg",//"images/image_%06d.jpg", // image_000001.jpg, image_000002.jpg,... 
     q: 50,
     timeout: 0, // take a total of 4 pictures over 12 seconds , 0 일경우 무제한 촬영
     timelapse: 1000, // take a picture every 1 hours
@@ -53,7 +53,8 @@ camera.on("start", function (err, timestamp) {
 camera.on("read", function (err, timestamp, filename) {
     console.log("timelapse image captured with filename: " + filename);
 
-    var save_filename = moment().format('YYYYMMDDHH') + ".jpg" ;
+    camera.set("output", "./images/" + moment().format('YYYYMMDDHHmmss') + ".jpg");
+
     delivery.send({
         name: filename,
         path: './images/' + filename,
