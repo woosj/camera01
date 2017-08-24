@@ -9,7 +9,7 @@
 */
 
 var camera = require("./camera/photo"); //사진 촬영 모듈
-//var arduino = require("./camera/arduino");
+var arduino = require("./camera/arduino");
 
 
 camera.start(); //카메라 모듈 실행

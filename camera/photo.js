@@ -12,6 +12,7 @@
 var RaspiCam = require("raspicam"); //카메라 모듈
 var socket = require('socket.io-client')('http://192.168.0.34:5001');   //소켓서버에 연결
 var dl = require('delivery');   //파일 전송 모듈
+var moment = require('moment');
 
 var camera = new RaspiCam({    
     width: 600,
@@ -51,7 +52,8 @@ camera.on("start", function (err, timestamp) {
 //카메라 촬영
 camera.on("read", function (err, timestamp, filename) {
     console.log("timelapse image captured with filename: " + filename);
-       
+
+    var save_filename = moment().format('YYYYMMDDHH') + ".jpg" ;
     delivery.send({
         name: filename,
         path: './images/' + filename,
