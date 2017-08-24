@@ -57,7 +57,7 @@ camera.on("read", function (err, timestamp, filename) {
     console.log(camera.get("output"));
     camera.set("output", "./images/" + moment().format('YYYYMMDDHHmmss') + ".jpg");
     console.log(camera.get("output"));
-    camera.derivativeOpts();
+    camera.stop();
     
 
     delivery.send({
@@ -79,6 +79,7 @@ camera.on("exit", function (timestamp) {
 //모듈 정지
 camera.on("stop", function (err, timestamp) {
     console.log("timelapse child process has been stopped at " + timestamp);
+    camera.start();
 });
 
 
