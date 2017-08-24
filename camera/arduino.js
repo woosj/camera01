@@ -44,13 +44,7 @@ port.on('error', function (err) {
     console.log('Error: ', err.message);
 });
 
-// Read data that is available but keep the stream from entering "flowing mode"
-port.on('readable', function () {
-    console.log('Data:', port.read());
-});
-
-//데이터 가져오기
-port.on('data', function (data) {
+parser.on('data', function (data) {
     console.log('Read and Send Data : ' + data);
 
     //var req = http.request(options, readJSONResponse);
@@ -58,8 +52,6 @@ port.on('data', function (data) {
     //req.end();
     //port.write(data);
 });
-
-//parser.on('data', console.log);
 
 
 module.exports = port;
