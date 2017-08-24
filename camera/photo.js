@@ -52,7 +52,7 @@ camera.on("start", function (err, timestamp) {
 //카메라 촬영
 camera.on("read", function (err, timestamp, filename) {
     console.log("timelapse image captured with filename: " + filename);
-
+    camera.set("output");
     camera.set("output", "./images/" + moment().format('YYYYMMDDHHmmss') + ".jpg");
 
     delivery.send({
