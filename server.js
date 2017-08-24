@@ -13,5 +13,3 @@ var arduino = require("./camera/arduino");
 
 
 camera.start(); //카메라 모듈 실행
-
-camera.get('output');
