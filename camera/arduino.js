@@ -6,26 +6,6 @@ var parser = new parsers.Readline({
 });
 
 var http = require('http');
-var options = {
-    host: '127.0.0.1',
-    path: '/testing/insert/data/test1/',
-    port: '8080',
-    method: 'POST'
-};
-
-function readJSONResponse(response) {
-    var responseData = "";
-    response.on('data', function (chunk) {
-        responseData += chunk;
-    });
-    response.on('end', function () {
-        var dataObj = JSON.parse(responseData);
-        console.log("Raw Response: " + responseData);
-        console.log("Message: " + dataObj.message);
-        console.log("Question: " + dataObj.question);
-    });
-}
-
 
 //라즈베리파이와 연결된 디바이스 주소
 var port = new SerialPort('/dev/ttyACM0', {
@@ -47,11 +27,22 @@ port.on('error', function (err) {
 parser.on('data', function (data) {
     console.log('Read and Send Data : ' + data);
 
-    //var req = http.request(options, readJSONResponse);
-    //req.write('{"name":"Bilbo,", "occupation":"Burglar"}');
-    //req.end();
-    //port.write(data);
-});
+    https.get('http://192.168.0.34:8080/testing/insert/data/test1/' + data, (resp) => {
+        let data = '';
 
+        // A chunk of data has been recieved.
+        resp.on('data', (chunk) => {
+            data += chunk;
+        });
+
+        // The whole response has been received. Print out the result.
+        resp.on('end', () => {
+            console.log(JSON.parse(data).explanation);
+        });
+
+    }).on("error", (err) => {
+        console.log("Error: " + err.message);
+    });
+});
 
 module.exports = port;
