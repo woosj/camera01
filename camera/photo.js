@@ -14,13 +14,29 @@ var socket = require('socket.io-client')('http://192.168.0.34:5001');   //소켓
 var dl = require('delivery');   //파일 전송 모듈
 var moment = require('moment');
 
+var camera2 = function (output) {
+    new RaspiCam({
+    width: 600,
+        height: 420,
+        mode: 'timelapse',
+       awb: 'off',
+       encoding: 'jpg',
+       output: output + ".jpg",//"images/image_%06d.jpg", // image_000001.jpg, image_000002.jpg,... 
+       q: 50,
+       timeout: 0, // take a total of 4 pictures over 12 seconds , 0 일경우 무제한 촬영
+       timelapse: 1000, // take a picture every 1 hours
+       nopreview: true,
+           th: '0:0:0'
+    })
+}
+
 var camera = new RaspiCam({    
     width: 600,
     height: 420,
     mode: 'timelapse',
     awb: 'off',
     encoding: 'jpg',
-    output: "./images/" + moment().format('YYYYMMDDHHmmss') + ".jpg",//"images/image_%06d.jpg", // image_000001.jpg, image_000002.jpg,... 
+    //output: "./images/" + moment().format('YYYYMMDDHHmmss') + ".jpg",//"images/image_%06d.jpg", // image_000001.jpg, image_000002.jpg,... 
     q: 50,
     timeout: 0, // take a total of 4 pictures over 12 seconds , 0 일경우 무제한 촬영
     timelapse: 1000, // take a picture every 1 hours
@@ -47,16 +63,16 @@ socket.on('connect', function () {
 //모듈 시작
 camera.on("start", function (err, timestamp) {
     console.log("timelapse started at " + timestamp);
-    console.log(camera.get("output"));
-    camera.set("output", "./images/" + moment().format('YYYYMMDDHHmmss') + ".jpg");
-    console.log(camera.get("output"));
 });
 
 //카메라 촬영
 camera.on("read", function (err, timestamp, filename) {
     console.log("timelapse image captured with filename: " + filename);
 
-   
+
+    console.log(camera.get("output"));
+    camera.set("output", "./images/" + moment().format('YYYYMMDDHHmmss') + ".jpg");
+    console.log(camera.get("output"));
 
 
     delivery.send({
