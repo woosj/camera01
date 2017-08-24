@@ -38,11 +38,11 @@ port.on('error', function (err) {
 
 //데이터 가져오기
 port.on('data', function (data) {
-    console.log('Read and Send Data : ' + data);
+    console.log('Read and Send Data : ' + data[0]);
 
-    var req = http.request(options, readJSONResponse);
-    req.write('{"name":"Bilbo,", "occupation":"Burglar"}');
-    req.end();
+    //var req = http.request(options, readJSONResponse);
+    //req.write('{"name":"Bilbo,", "occupation":"Burglar"}');
+    //req.end();
     //port.write(data);
 });
 
