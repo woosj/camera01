@@ -54,9 +54,6 @@ camera.on("start", function (err, timestamp) {
 camera.on("read", function (err, timestamp, filename) {
     console.log("timelapse image captured with filename: " + filename);
 
-    camera.get("output");
-    camera.set("output", "./images/" + moment().format('YYYYMMDDHHmmss') + ".jpg");
-
     delivery.send({
         name: filename,
         path: './images/' + filename,
@@ -64,6 +61,7 @@ camera.on("read", function (err, timestamp, filename) {
     });
     
 });
+
 
 //모듈 종료
 camera.on("exit", function (timestamp) {
