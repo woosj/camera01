@@ -1,5 +1,5 @@
 ﻿
-var SerialPort = require('serialport'); //아두이노와 시리얼 통신할 수 있는 모듈
+var SerialPort = require('serialport').SerialPort; //아두이노와 시리얼 통신할 수 있는 모듈
 var http = require('http');
 var options = {
     host: '127.0.0.1',
