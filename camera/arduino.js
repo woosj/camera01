@@ -1,5 +1,5 @@
 ﻿
-var SerialPort = require('serialport').SerialPort; //아두이노와 시리얼 통신할 수 있는 모듈
+var SerialPort = require('serialport'); //아두이노와 시리얼 통신할 수 있는 모듈
 var http = require('http');
 var options = {
     host: '127.0.0.1',
@@ -34,11 +34,16 @@ port.on('open', function () {
 // open errors will be emitted as an error event
 port.on('error', function (err) {
     console.log('Error: ', err.message);
-})
+});
+
+// Read data that is available but keep the stream from entering "flowing mode"
+port.on('readable', function () {
+    console.log('Data:', port.read());
+});
 
 //데이터 가져오기
 port.on('data', function (data) {
-    console.log('Read and Send Data : ' + data.toString());
+    console.log('Read and Send Data : ' + data);
 
     //var req = http.request(options, readJSONResponse);
     //req.write('{"name":"Bilbo,", "occupation":"Burglar"}');
