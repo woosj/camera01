@@ -47,8 +47,6 @@ socket.on('connect', function () {
 //모듈 시작
 camera.on("start", function (err, timestamp) {
     console.log("timelapse started at " + timestamp);
-    camera.get("output");
-    camera.get("width");
 });
 
 //카메라 촬영
