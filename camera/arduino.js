@@ -26,12 +26,13 @@ function readJSONResponse(response) {
     });
 }
 
-port.pipe(parser);
 
 //라즈베리파이와 연결된 디바이스 주소
 var port = new SerialPort('/dev/ttyACM0', {
     baudrate: 9600
 });
+
+port.pipe(parser);
 
 //포트 열기
 port.on('open', function () {
