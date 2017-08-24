@@ -49,7 +49,7 @@ camera.on("start", function (err, timestamp) {
     console.log("timelapse started at " + timestamp);
 
 
-    camera.set("output");
+    camera.get("output");
     camera.set("output", "./images/" + moment().format('YYYYMMDDHHmmss') + ".jpg");
 });
 
