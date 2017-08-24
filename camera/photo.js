@@ -54,7 +54,7 @@ camera.on("read", function (err, timestamp, filename) {
     console.log("timelapse image captured with filename: " + filename);
 
     console.log(camera.get("output"));
-    camera.set("output", "test.jpg");
+    camera.set("output", "./images/" + moment().format('YYYYMMDDHHmmss') + ".jpg");
     console.log(camera.get("output"));
 
 
