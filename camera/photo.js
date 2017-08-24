@@ -22,7 +22,7 @@ var camera = new RaspiCam({
     encoding: 'jpg',
     output: "./images/" + moment().format('YYYYMMDDHHmmss') + ".jpg",//"images/image_%06d.jpg", // image_000001.jpg, image_000002.jpg,... 
     q: 50,
-    timeout: 2000, // take a total of 4 pictures over 12 seconds , 0 일경우 무제한 촬영
+    timeout: 0, // take a total of 4 pictures over 12 seconds , 0 일경우 무제한 촬영
     timelapse: 1000, // take a picture every 1 hours
     nopreview: true,
     th: '0:0:0'
@@ -47,15 +47,15 @@ socket.on('connect', function () {
 //모듈 시작
 camera.on("start", function (err, timestamp) {
     console.log("timelapse started at " + timestamp);
-
+    camera.get("output");
+    camera.get("width");
 });
 
 //카메라 촬영
 camera.on("read", function (err, timestamp, filename) {
     console.log("timelapse image captured with filename: " + filename);
 
-    camera.get("output");
-    camera.get("width");
+    
 
     delivery.send({
         name: filename,
@@ -69,9 +69,6 @@ camera.on("read", function (err, timestamp, filename) {
 //모듈 종료
 camera.on("exit", function (timestamp) {
     console.log("timelapse child process has exited");
-    camera.stop();
-    console.log('Restarting camera...')
-    camera.start()
 });
 
 //모듈 정지
