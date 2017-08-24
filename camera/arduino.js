@@ -1,5 +1,10 @@
 ﻿
-/*var SerialPort = require('serialport'); //아두이노와 시리얼 통신할 수 있는 모듈
+var SerialPort = require('serialport'); //아두이노와 시리얼 통신할 수 있는 모듈
+var parsers = SerialPort.parsers;
+var parser = new parsers.Readline({
+    delimiter: '\r\n'
+});
+
 var http = require('http');
 var options = {
     host: '127.0.0.1',
@@ -20,6 +25,8 @@ function readJSONResponse(response) {
         console.log("Question: " + dataObj.question);
     });
 }
+
+port.pipe(parser);
 
 //라즈베리파이와 연결된 디바이스 주소
 var port = new SerialPort('/dev/ttyACM0', {
@@ -50,26 +57,8 @@ port.on('data', function (data) {
     //req.end();
     //port.write(data);
 });
-*/
 
-
-const SerialPort = require('serialport');
-const parsers = SerialPort.parsers;
-
-// Use a `\r\n` as a line terminator
-const parser = new parsers.Readline({
-    delimiter: '\r\n'
-});
-
-const port = new SerialPort('/dev/ttyACM0', {
-    baudRate: 9600
-});
-
-port.pipe(parser);
-
-port.on('open', () => console.log('Port open'));
-
-parser.on('data', console.log);
+//parser.on('data', console.log);
 
 
 module.exports = port;
