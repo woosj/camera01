@@ -38,7 +38,7 @@ port.on('error', function (err) {
 
 //데이터 가져오기
 port.on('data', function (data) {
-    console.log('Read and Send Data : ' + data[0]);
+    console.log('Read and Send Data : ' + data.toString());
 
     //var req = http.request(options, readJSONResponse);
     //req.write('{"name":"Bilbo,", "occupation":"Burglar"}');
