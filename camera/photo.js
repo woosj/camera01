@@ -54,7 +54,8 @@ camera.on("read", function (err, timestamp, filename) {
        
     delivery.send({
         name: filename,
-        path: 'images/' + filename
+        path: './images/' + filename,
+        params: { channel: 'test1' }
     });
     
 });
