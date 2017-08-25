@@ -13,5 +13,4 @@ var arduino = require("./camera/arduino");
 
 var intervalObj = setInterval(function(){
     camera.start();
-    console.log('test');
 }, 15000);
