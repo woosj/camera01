@@ -8,8 +8,8 @@
 *
 */
 
-var camera = require("./camera/photo"); //사진 촬영 모듈
+var camera = require("./camera/photo2"); //사진 촬영 모듈
 var arduino = require("./camera/arduino");
 
 
- camera.start();
+camera.start();

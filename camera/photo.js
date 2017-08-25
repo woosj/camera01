@@ -17,12 +17,13 @@ var moment = require('moment');
 var option = {
     width: 600,
     height: 420,
-    mode: 'photo',
+    mode: 'timelapse',
     awb: 'off',
     encoding: 'jpg',
-    output: "./images/" + moment().format('YYYYMMDDHHmmss') + ".jpg",//"images/image_%06d.jpg", // image_000001.jpg, image_000002.jpg,... 
+    output: "./images/image_%06d.jpg", // image_000001.jpg, image_000002.jpg,... moment().format('YYYYMMDDHHmmss') + ".jpg"
     q: 50,
-    timeout: 0,
+    timeout: 0, // take a total of 4 pictures over 12 seconds , 0 일경우 무제한 촬영
+    timelapse: 5000,
     nopreview: true,
     th: '0:0:0'
 };
@@ -59,7 +60,7 @@ camera.on("read", function (err, timestamp, filename) {
         path: './images/' + filename,
         params: { channel: 'test1' }
     });    
-    
+
 });
 
 
