@@ -33,14 +33,14 @@ var config = {
 
 
 //사진 챕쳐 시작
-module.exports.startStreaming = function () {
+exports.startStreaming = function () {
     console.log('Starting stream.');
     isStreaming = true;
     intervalObj = setInterval(takeImage, config['capture-rate']);
 };
 
 //사진 캡쳐 종료
-function stopStreaming() {
+exports.stopStreaming = function () {
     console.log('Stopping stream.');
     isStreaming = false;
     if (process) {
@@ -50,7 +50,7 @@ function stopStreaming() {
 }
 
 
-function takeImage() {
+exports.takeImage = function () {
     //console.log('taking image');
     var path_name = getAbsoluteImagePath();
     var args = [
@@ -63,7 +63,7 @@ function takeImage() {
     process.on('exit', path_name ,sendImage);
 }
 
-function sendImage(path_name) {
+exports.sendImage = function (path_name) {
 
     //소켓통신으로 이미지 파일을 서버로 전송
     socket.on('connect', function () {
@@ -88,7 +88,7 @@ function sendImage(path_name) {
     });
 }
 
-function getAbsoluteImagePath() {
+exports.getAbsoluteImagePath = function () {
     /*
     *   예: /images/test1/201705/image.jpg
     *
