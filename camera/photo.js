@@ -84,6 +84,4 @@ camera.on("stop", function (err, timestamp) {
 });
 
 
-setInterval(camera.start, 1500);    //카메라 모듈 실행
-
 module.exports = camera;
