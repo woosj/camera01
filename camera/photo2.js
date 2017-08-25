@@ -40,17 +40,17 @@ module.exports.startStreaming = function () {
 };
 
 //사진 캡쳐 종료
-module.exports.stopStreaming = function () {
+function stopStreaming() {
     console.log('Stopping stream.');
     isStreaming = false;
     if (process) {
         process.kill();
     }
     clearInterval(intervalObj);
-};
+}
 
 
-module.exports.takeImage = function () {
+function takeImage() {
     //console.log('taking image');
     var path_name = getAbsoluteImagePath();
     var args = [
@@ -60,10 +60,10 @@ module.exports.takeImage = function () {
         '-o', path_name   // path + name
     ];
     process = spawn('raspistill', args);
-    process.on('exit', path_name, sendImage);
-};
+    process.on('exit', path_name ,sendImage);
+}
 
-module.exports.sendImage = function (path_name) {
+function sendImage(path_name) {
 
     //소켓통신으로 이미지 파일을 서버로 전송
     socket.on('connect', function () {
@@ -86,9 +86,9 @@ module.exports.sendImage = function (path_name) {
         });
 
     });
-};
+}
 
-module.exports.getAbsoluteImagePath = function () {
+function getAbsoluteImagePath() {
     /*
     *   예: /images/test1/201705/image.jpg
     *
@@ -107,9 +107,9 @@ module.exports.getAbsoluteImagePath = function () {
                 console.log('dir writed');
             });
 
-        } else {
-
-
+        } else {   
+            
+            
 
             //월별 폴더 유무 체크
             fs.exists('./images/' + config['channel'], function (exists) {
@@ -122,6 +122,6 @@ module.exports.getAbsoluteImagePath = function () {
             });
         }
     });
-
-    return path.join(__dirname, config['image-path'], config['channel'], date_folder, image_file_date);
-};
+    
+    return path.join(__dirname, config['image-path'], config['channel'], date_folder, image_file_date );
+}
