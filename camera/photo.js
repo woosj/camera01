@@ -61,8 +61,7 @@ camera.on("read", function (err, timestamp, filename) {
         params: { channel: 'test1' }
     });    
 
-
-    camera.set("output", "./images/" + moment().format('YYYYMMDDHHmmss') + ".jpg");
+    camera.stop();
 
 });
 
@@ -75,6 +74,9 @@ camera.on("exit", function (timestamp) {
 //모듈 정지
 camera.on("stop", function (err, timestamp) {
     console.log("timelapse child process has been stopped at " + timestamp);
+
+    camera.set("output", "./images/" + moment().format('YYYYMMDDHHmmss') + ".jpg");
+    camera.start();
 });
 
 
