@@ -52,13 +52,7 @@ camera.on("start", function (err, timestamp) {
 //카메라 촬영
 camera.on("read", function (err, timestamp, filename) {
     console.log("timelapse image captured with filename: " + filename);
-
-    console.log(camera.get("output"));
-    camera.set("output", "./images/" + moment().format('YYYYMMDDHHmmss') + ".jpg");
-    console.log(camera.get("output"));
-    camera.stop();
     
-
     delivery.send({
         name: filename,
         path: './images/' + filename,
@@ -73,13 +67,11 @@ camera.on("read", function (err, timestamp, filename) {
 //모듈 종료
 camera.on("exit", function (timestamp) {
     console.log("timelapse child process has exited");
-    camera.start();
 });
 
 //모듈 정지
 camera.on("stop", function (err, timestamp) {
     console.log("timelapse child process has been stopped at " + timestamp);
-    camera.start();
 });
 
 
