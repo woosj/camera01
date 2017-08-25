@@ -60,7 +60,9 @@ exports.takeImage = function () {
         '-o', path_name   // path + name
     ];
     process = spawn('raspistill', args);
-    process.on('exit', this.sendImage, path_name);
+    this.sendImage(path_name);
+
+    process.on('exit', function () { console.log('don'); } );
 }
 
 exports.sendImage = function (path_name) {
