@@ -32,7 +32,7 @@ var config = {
     "image-height": 480
 
 }
-
+var path_name = "";
 
 //사진 챕쳐 시작
 function startStreaming() {
@@ -54,7 +54,7 @@ function stopStreaming() {
 
 function takeImage() {
     //console.log('taking image');
-    var path_name = getAbsoluteImagePath();
+    path_name = getAbsoluteImagePath();
     var args = [
         '-w', config['image-width'],   // width
         '-h', config['image-height'],  // height
@@ -62,7 +62,7 @@ function takeImage() {
         '-o', path_name   // path + name
     ];
     process = spawn('raspistill', args);
-    process.on('exit', path_name, sendImage);
+    process.on('exit', sendImage);
 }
 
 function sendImage(path_name) {
