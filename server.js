@@ -10,5 +10,3 @@
 
 var camera = require("./camera/photo"); //사진 촬영 모듈
 var arduino = require("./camera/arduino");
-
-setInterval(camera.start(), 1500);    //카메라 모듈 실행
