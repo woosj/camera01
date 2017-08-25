@@ -52,7 +52,7 @@ exports.stopStreaming = function () {
 
 exports.takeImage = function () {
     //console.log('taking image');
-    var path_name = getAbsoluteImagePath();
+    var path_name = this.getAbsoluteImagePath();
     var args = [
         '-w', config['image-width'],   // width
         '-h', config['image-height'],  // height
@@ -60,7 +60,7 @@ exports.takeImage = function () {
         '-o', path_name   // path + name
     ];
     process = spawn('raspistill', args);
-    process.on('exit', path_name ,sendImage);
+    process.on('exit', path_name, this.sendImage);
 }
 
 exports.sendImage = function (path_name) {
