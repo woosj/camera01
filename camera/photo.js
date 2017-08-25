@@ -14,8 +14,7 @@ var socket = require('socket.io-client')('http://192.168.0.34:5001');   //소켓
 var dl = require('delivery');   //파일 전송 모듈
 var moment = require('moment');
 
-
-var camera = new RaspiCam({    
+var option = {
     width: 600,
     height: 420,
     mode: 'photo',
@@ -26,7 +25,9 @@ var camera = new RaspiCam({
     timeout: 10000, // take a total of 4 pictures over 12 seconds , 0 일경우 무제한 촬영
     nopreview: true,
     th: '0:0:0'
-});
+};
+
+var camera = new RaspiCam({ option });
 
 //소켓통신으로 이미지 파일을 서버로 전송
 socket.on('connect', function () {
@@ -63,6 +64,7 @@ camera.on("read", function (err, timestamp, filename) {
 //모듈 종료
 camera.on("exit", function (timestamp) {
     camera.stop();
+    camera.set("output", "./images/" + moment().format('YYYYMMDDHHmmss') + ".jpg");
     console.log("timelapse child process has exited");
     camera.start();
 });
