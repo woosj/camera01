@@ -47,7 +47,7 @@ exports.stopStreaming = function () {
         process.kill();
     }
     clearInterval(intervalObj);
-}
+};
 
 
 exports.takeImage = function () {
@@ -62,8 +62,8 @@ exports.takeImage = function () {
     process = spawn('raspistill', args);
     this.sendImage(path_name);
 
-    process.on('exit', function () { console.log('don'); } );
-}
+    process.on('exit', function () { console.log('don'); });
+};
 
 exports.sendImage = function (path_name) {
 
@@ -88,7 +88,7 @@ exports.sendImage = function (path_name) {
         });
 
     });
-}
+};
 
 exports.getAbsoluteImagePath = function () {
     /*
@@ -109,9 +109,9 @@ exports.getAbsoluteImagePath = function () {
                 console.log('dir writed');
             });
 
-        } else {   
-            
-            
+        } else {
+
+
 
             //월별 폴더 유무 체크
             fs.exists('./images/' + config['channel'], function (exists) {
@@ -124,6 +124,6 @@ exports.getAbsoluteImagePath = function () {
             });
         }
     });
-    
-    return path.join(__dirname, config['image-path'], config['channel'], date_folder, image_file_date );
-}
+
+    return path.join(__dirname, config['image-path'], config['channel'], date_folder, image_file_date);
+};
