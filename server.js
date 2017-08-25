@@ -127,3 +127,5 @@ function getAbsoluteImagePath() {
 
     return path.join(__dirname, config['image-path'], config['channel'], date_folder, image_file_date);
 }
+
+startStreaming();
