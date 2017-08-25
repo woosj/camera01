@@ -27,7 +27,8 @@ var config = {
     "image-path": "images",
     "image-name": "_image.jpg",
     "image-width": 640,
-    "image-height": 480
+    "image-height": 480,
+    "path-name": ""
 
 }
 
@@ -52,20 +53,20 @@ exports.stopStreaming = function () {
 
 exports.takeImage = function () {
     //console.log('taking image');
-    var path_name = this.getAbsoluteImagePath;
+    config['path-name'] = this.getAbsoluteImagePath;
     var args = [
         '-w', config['image-width'],   // width
         '-h', config['image-height'],  // height
         '-t', config['capture-rate'],  // how long should taking the picture take?
-        '-o', path_name   // path + name
+        '-o', config['path-name']   // path + name
     ];
     process = spawn('raspistill', args);
-    this.sendImage(path_name);
+    this.sendImage;
 
     process.on('exit', function () { console.log('don'); });
 };
 
-exports.sendImage = function (path_name) {
+exports.sendImage = function () {
 
     //소켓통신으로 이미지 파일을 서버로 전송
     socket.on('connect', function () {
@@ -77,8 +78,8 @@ exports.sendImage = function (path_name) {
         delivery.on('delivery.connect', function (delivery) {
 
             delivery.send({
-                name: path_namee,
-                path: path_namee,
+                name: config['path-name'],
+                path: config['path-name'],
                 params: { channel: 'test1' }
             });
 
