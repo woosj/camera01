@@ -52,7 +52,7 @@ exports.stopStreaming = function () {
 
 exports.takeImage = function () {
     //console.log('taking image');
-    var path_name = this.getAbsoluteImagePath();
+    var path_name = this.getAbsoluteImagePath;
     var args = [
         '-w', config['image-width'],   // width
         '-h', config['image-height'],  // height
