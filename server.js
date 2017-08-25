@@ -11,6 +11,5 @@
 var camera = require("./camera/photo"); //사진 촬영 모듈
 var arduino = require("./camera/arduino");
 
-var intervalObj = setInterval(function(){
-    camera.start();
-}, 15000);
+
+ camera.start();

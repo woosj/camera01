@@ -51,22 +51,20 @@ camera.on("start", function (err, timestamp) {
 
 //카메라 촬영
 camera.on("read", function (err, timestamp, filename) {
-    console.log("timelapse image captured with filename: " + filename);
-    
+    console.log("timelapse image captured with filename: " + filename);    
     delivery.send({
         name: filename,
         path: './images/' + filename,
         params: { channel: 'test1' }
-    });
-
-
-    
+    });    
 });
 
 
 //모듈 종료
 camera.on("exit", function (timestamp) {
+    camera.stop();
     console.log("timelapse child process has exited");
+    camera.start();
 });
 
 //모듈 정지
