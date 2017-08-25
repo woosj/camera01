@@ -53,17 +53,17 @@ exports.stopStreaming = function () {
 
 exports.takeImage = function () {
     //console.log('taking image');
-    config['path-name'] = this.getAbsoluteImagePath;
+    this.config['path-name'] = this.getAbsoluteImagePath;
     var args = [
-        '-w', config['image-width'],   // width
-        '-h', config['image-height'],  // height
-        '-t', config['capture-rate'],  // how long should taking the picture take?
-        '-o', config['path-name']   // path + name
+        '-w', this.config['image-width'],   // width
+        '-h', this.config['image-height'],  // height
+        '-t', this.config['capture-rate'],  // how long should taking the picture take?
+        '-o', this.config['path-name']   // path + name
     ];
     process = spawn('raspistill', args);
     this.sendImage;
 
-    process.on('exit', function () { console.log(config['path-name']); });
+    process.on('exit', function () { console.log(this.config['path-name']); });
 };
 
 exports.sendImage = function () {
@@ -78,8 +78,8 @@ exports.sendImage = function () {
         delivery.on('delivery.connect', function (delivery) {
 
             delivery.send({
-                name: config['path-name'],
-                path: config['path-name'],
+                name: this.config['path-name'],
+                path: this.config['path-name'],
                 params: { channel: 'test1' }
             });
 
@@ -97,15 +97,15 @@ exports.getAbsoluteImagePath = function () {
     *
     *
     */
-    var image_file_date = moment().format('YYYYMMDDHHmmss') + config['image-name'];
-    var date_folder = moment().format('YYYYMMDD');
+    var image_file_date = this.moment().format('YYYYMMDDHHmmss') + this.config['image-name'];
+    var date_folder = this.moment().format('YYYYMMDD');
 
     //채널별로 폴더 유무 체크
-    fs.exists('./images/' + config['channel'], function (exists) {
+    fs.exists('./images/' + this.config['channel'], function (exists) {
 
         if (!exists) {  //없을 경우 폴더 생성
 
-            fs.mkdir('./images/' + config['channel'], '0777', function (err) {
+            fs.mkdir('./images/' + this.config['channel'], '0777', function (err) {
                 if (err) throw err;
                 console.log('dir writed');
             });
@@ -115,9 +115,9 @@ exports.getAbsoluteImagePath = function () {
 
 
             //월별 폴더 유무 체크
-            fs.exists('./images/' + config['channel'], function (exists) {
+            fs.exists('./images/' + this.config['channel'], function (exists) {
                 if (!exists) {
-                    fs.mkdir('./images/' + config['channel'] + "/" + date_folder, '0777', function (err) {
+                    fs.mkdir('./images/' + this.config['channel'] + "/" + date_folder, '0777', function (err) {
                         if (err) throw err;
                         console.log('dir writed');
                     });
@@ -126,5 +126,5 @@ exports.getAbsoluteImagePath = function () {
         }
     });
 
-    return path.join(__dirname, config['image-path'], config['channel'], date_folder, image_file_date);
+    return path.join(__dirname, this.config['image-path'], this.config['channel'], date_folder, image_file_date);
 };
