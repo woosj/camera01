@@ -36,7 +36,7 @@ var config = {
 exports.startStreaming = function () {
     console.log('Starting stream.');
     isStreaming = true;
-    intervalObj = setInterval(takeImage, config['capture-rate']);
+    intervalObj = setInterval(this.takeImage, config['capture-rate']);
 };
 
 //사진 캡쳐 종료
