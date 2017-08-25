@@ -17,7 +17,7 @@ var moment = require('moment');
 var option = {
     width: 600,
     height: 420,
-    mode: 'timelapse',
+    mode: 'photo',
     awb: 'off',
     encoding: 'jpg',
     output: "./images/" + moment().format('YYYYMMDDHHmmss') + ".jpg",//"images/image_%06d.jpg", // image_000001.jpg, image_000002.jpg,... 
