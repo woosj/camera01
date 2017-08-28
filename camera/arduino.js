@@ -27,7 +27,7 @@ port.on('error', function (err) {
 parser.on('data', function (data) {
     console.log('Read and Send Data : ' + data);
 
-    http.get('http://192.168.0.34:8080/testing/insert/data/test1/' + data, (resp) => {
+    http.get('http://192.168.0.34:8080/insert?field=1&value=' + data, (resp) => {
         let data = '';
 
         // A chunk of data has been recieved.

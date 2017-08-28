@@ -20,10 +20,10 @@ var option = {
     mode: 'timelapse',
     awb: 'off',
     encoding: 'jpg',
-    output: "./images/image_%06d.jpg", // image_000001.jpg, image_000002.jpg,... moment().format('YYYYMMDDHHmmss') + ".jpg"
+    output: "./images/image_%03d.jpg", // image_000001.jpg, image_000002.jpg,... moment().format('YYYYMMDDHHmmss') + ".jpg"
     q: 50,
     timeout: 0, // take a total of 4 pictures over 12 seconds , 0 일경우 무제한 촬영
-    timelapse: 5000,
+    timelapse: 1000*60*60, //1시간 단위로 촬영
     nopreview: true,
     th: '0:0:0'
 };
@@ -58,7 +58,7 @@ camera.on("read", function (err, timestamp, filename) {
     delivery.send({
         name: filename,
         path: './images/' + filename,
-        params: { channel: 'test1', img_name: moment().format('YYYYMMDDHHmmss') + ".jpg" }
+        params: { channel: '1', img_name: moment().format('YYYYMMDDHH') + ".jpg" }
     });    
 
 });
