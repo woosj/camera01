@@ -20,15 +20,13 @@ port.pipe(parser);
 
 //MQTT pub/sub
 client.on('connect', function () {
-    client.subscribe('presence');
-    client.publish('presence', 'Hello mqtt');
+    client.subscribe('/1/onoff');
 })
 
 //callback
 client.on('message', function (topic, message) {
     // message is Buffer 
     console.log(message.toString());
-    client.end();
 })
 
 //포트 열기
@@ -44,7 +42,9 @@ port.on('error', function (err) {
 parser.on('data', function (data) {
     console.log('Read and Send Data : ' + data);
 
-    http.get('http://192.168.0.34:8080/test/insert?field=1&value=' + data, (resp) => {
+    var sensorObj = JSON.parse(data.toString()); // json 형식 data를 객체형식으로 저장
+
+    http.get('http://192.168.0.34:8080/test/insert?field=1&value=' + sensorObj.soil, (resp) => {
         let data = '';
 
         // A chunk of data has been recieved.
