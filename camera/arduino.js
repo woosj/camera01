@@ -50,6 +50,8 @@ parser.on('data', function (data) {
     });
 });
 
+port.write('ROBOT PLEASE RESPOND\n');
+
 //MQTT pub/sub
 client.on('connect', function () {
     client.subscribe('/1/onoff');
