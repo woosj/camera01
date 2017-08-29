@@ -1,5 +1,8 @@
 ﻿
 var SerialPort = require('serialport'); //아두이노와 시리얼 통신할 수 있는 모듈
+var mqtt = require('mqtt'); //mqtt 모듈
+var client = mqtt.connect('mqtt://13.124.28.87');  //mqtt 서버 접속
+
 var parsers = SerialPort.parsers;
 var parser = new parsers.Readline({
     delimiter: '\r\n'
@@ -13,6 +16,20 @@ var port = new SerialPort('/dev/ttyACM0', {
 });
 
 port.pipe(parser);
+
+
+//MQTT pub/sub
+client.on('connect', function () {
+    client.subscribe('presence');
+    client.publish('presence', 'Hello mqtt');
+})
+
+//callback
+client.on('message', function (topic, message) {
+    // message is Buffer 
+    console.log(message.toString());
+    client.end();
+})
 
 //포트 열기
 port.on('open', function () {
