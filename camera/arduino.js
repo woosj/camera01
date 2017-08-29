@@ -28,7 +28,7 @@ client.on('connect', function () {
 client.on('message', function (topic, message) {
     // message is Buffer 
     console.log(message.toString());
-    serial.write(message.toString(), function (err) { });
+    port.write(message.toString(), function (err) { });
     client.end();
 })
 
