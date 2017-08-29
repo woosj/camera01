@@ -9,6 +9,7 @@ var parser = new parsers.Readline({
 });
 
 var http = require('http');
+var deivce_num = 1;
 
 //라즈베리파이와 연결된 디바이스 주소
 var port = new SerialPort('/dev/ttyACM0', {
@@ -31,8 +32,8 @@ parser.on('data', function (data) {
     console.log('Read and Send Data : ' + data);
 
     var sensorObj = JSON.parse(data.toString()); // json 형식 data를 객체형식으로 저장
-    console.log(sensorObj.soil);
-    http.get('http://192.168.0.34:8080/test/insert?field=1&value=' + sensorObj.soil, (resp) => {
+    var insert_url = 'http://192.168.0.34:8080/test/insert?field=' + deivce_num + '&value=' + sensorObj.soil
+    http.get(insert_url, (resp) => {
         let data = '';
 
         // A chunk of data has been recieved.
