@@ -1,15 +1,15 @@
 'use strict';
+
 /*
-*   »çÁø ¹× ¼¾¼­ Á¤º¸¸¦ ÇÏ¿© ¼­¹ö·Î Àü¼Û
+*   ì‚¬ì§„ ë° ì„¼ì„œ ì •ë³´ë¥¼ í•˜ì—¬ ì„œë²„ë¡œ ì „ì†¡
 *
-*   1. Ä«¸Ş¶ó±â´É
-*   2. ¼¾½Ì ±â´É
-*   3. MQTT »ç¿ëÀÚ ¸í·É È®ÀÎ
+*   1. ì¹´ë©”ë¼ê¸°ëŠ¥
+*   2. ì„¼ì‹± ê¸°ëŠ¥
+*   3. MQTT ì‚¬ìš©ì ëª…ë ¹ í™•ì¸
 *
 */
 
-var camera = require("./camera/photo"); //»çÁø ÃÔ¿µ ¸ğµâ
-var arduino = require("./camera/arduino");
+var camera = require("./camera/photo"); //ì‚¬ì§„ ì´¬ì˜ ëª¨ë“ˆ
+var arduino = require("./camera/arduino"); //arduino
 
-
- camera.start();
+camera.start(); //ì‚¬ì§„ ì´¬ì˜ ì‹œì‘
