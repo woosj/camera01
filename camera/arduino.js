@@ -54,7 +54,6 @@ parser.on('data', function (data) {
 //MQTT pub/sub
 client.on('connect', function () {
     client.subscribe('/1/onoff');
-    client.publish('/1/onoff', "1");
 })
 
 //callback
@@ -62,7 +61,6 @@ client.on('message', function (topic, message) {
     // message is Buffer 
     console.log(message.toString());
     port.write(message.toString(), function (err) { });
-    client.end();
 })
 
 module.exports = port;
