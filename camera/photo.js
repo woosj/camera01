@@ -9,11 +9,19 @@
     6. 파일 보관 기간
     7. 채널 관리
 */
-var RaspiCam = require("raspicam"); //카메라 모듈
-var socket = require('socket.io-client')('http://13.124.28.87:5001');   //소켓서버에 연결
-var dl = require('delivery');   //파일 전송 모듈
+//카메라 모듈
+var RaspiCam = require("raspicam");
+
+//소켓서버에 연결
+var socket = require('socket.io-client')('http://13.124.28.87:5001');
+
+//파일 전송 모듈
+var dl = require('delivery');
+
+//날짜 관련 모듈
 var moment = require('moment');
 
+//카메라 설정
 var option = {
     width: 600,
     height: 420,
@@ -28,22 +36,21 @@ var option = {
     th: '0:0:0'
 };
 
+//카메라 생성
 var camera = new RaspiCam(option);
 
 //소켓통신으로 이미지 파일을 서버로 전송
 socket.on('connect', function () {
     console.log("Sockets connected");
+
     //delivery 패키지 이용
-    delivery = dl.listen(socket);
-    delivery.connect();
-
-    delivery.on('delivery.connect', function (delivery) {        
-
-        delivery.on('send.success', function (file) {
+    delivery = dl.listen(socket); //소켓 할당
+    delivery.connect(); //소켓 연결
+    delivery.on('delivery.connect', function (delivery) { //연걸 성공
+        delivery.on('send.success', function (file) { //전송 성공
             console.log('File sent successfully!');
         });
     });
-
 });
 
 //모듈 시작
@@ -53,14 +60,14 @@ camera.on("start", function (err, timestamp) {
 
 //카메라 촬영
 camera.on("read", function (err, timestamp, filename) {
-    console.log("timelapse image captured with filename: " + filename);   
-    
+    console.log("timelapse image captured with filename: " + filename);
+
+    //소켓으로 촬영 파일 보내기
     delivery.send({
         name: filename,
         path: './images/' + filename,
         params: { channel: '1', img_name: moment().format('YYYYMMDDHH') + ".jpg" }
-    });    
-
+    });
 });
 
 
