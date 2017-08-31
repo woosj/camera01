@@ -32,7 +32,7 @@ parser.on('data', function (data) {
     console.log('Read and Send Data : ' + data);
 
     var sensorObj = JSON.parse(data.toString()); // json 형식 data를 객체형식으로 저장
-    var insert_url = 'http://192.168.0.34:8080/test/insert?field=' + deivce_num + '&value=' + sensorObj.soil
+    var insert_url = 'http://13.124.28.87:8080/test/insert?field=' + deivce_num + '&value=' + sensorObj.soil
     http.get(insert_url, (resp) => {
         let data = '';
 
