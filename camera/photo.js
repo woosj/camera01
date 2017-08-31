@@ -14,6 +14,8 @@ var socket = require('socket.io-client')('http://13.124.28.87:5001');   //소켓
 var dl = require('delivery');   //파일 전송 모듈
 var moment = require('moment');
 
+
+
 var option = {
     width: 600,
     height: 420,
