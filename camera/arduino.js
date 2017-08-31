@@ -8,7 +8,7 @@ var parser = new parsers.Readline({
     delimiter: '\r\n'
 });
 
-var http = require('http');
+var http = require('http'); 
 var deivce_num = 1;
 
 //라즈베리파이와 연결된 디바이스 주소
